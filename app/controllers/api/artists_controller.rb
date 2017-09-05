@@ -5,9 +5,15 @@ class Api::ArtistsController < ApplicationController
     end
 
     def create
-        @artist = Artist.create(artist_params)
-        redirect_to artist_path(@artist)
+        @artist = Artist.new(artist_params)
+        if @artist.save
+            render json: @artist
+        else
+            render json: {
+                message: 'error createing artist'
+            }
     end
+end
 
     def show
         @artist = Artist.find(params[:id])
@@ -16,14 +22,20 @@ class Api::ArtistsController < ApplicationController
     
     def update
         @artist = Artist.find(params[:id])
-        @artist.update!(artist_params)
-        redirect_to artist_path(@artist)
+       if @artist.update!(artist_params)
+       else
+        render json: {
+            message: 'error createing artist'
+        }
     end
+end
     
     def destroy
         @artist = Artist.find(params[:id])
         @artist.destroy
-        redirect_to artists_path
+        render json:{
+            message: 'artist successfully destroyed'
+        }
     end
     
     private
@@ -33,4 +45,4 @@ class Api::ArtistsController < ApplicationController
     end
 end
 
-  end
+
