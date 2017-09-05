@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import ArtistCard from './ArtistCard';
 import styled from 'styled-components';
 
@@ -44,7 +43,9 @@ class AllArtists extends Component {
         return (
             <ArtistListStyles>
              {this.state.artists.map(artist=>(
+                 
             <ArtistCard key={artist.id} artist={artist}/>
+            
              ))}
             </ArtistListStyles>
         );
