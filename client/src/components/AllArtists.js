@@ -1,5 +1,17 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import ArtistCard from './ArtistCard';
+import styled from 'styled-components';
+
+const ArtistListStyles = styled.div`
+margin: 20px 5%;
+width: 90%;
+display: flex;
+justify-content: space-around;
+flex-wrap: wrap;
+
+`;
 
 class AllArtists extends Component {
     constructor(){
@@ -14,7 +26,7 @@ class AllArtists extends Component {
     this._fetchArtists();
     }
 
-    
+
     _fetchArtists = async ()=>{
         try{
             const res = await axios.get('/api/artists');
@@ -30,9 +42,11 @@ class AllArtists extends Component {
     
     render() {
         return (
-            <div>
-              <h1>Hello from all artists</h1>  
-            </div>
+            <ArtistListStyles>
+             {this.state.artists.map(artist=>(
+            <ArtistCard key={artist.id} artist={artist}/>
+             ))}
+            </ArtistListStyles>
         );
     }
 }
