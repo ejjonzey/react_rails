@@ -4,8 +4,13 @@ import AllArtists from "./components/AllArtists";
 import Artist from "./components/Artist";
 import SignUp from "./components/SignUp";
 import GlobalNav from "./components/GlobalNav.js";
+import {setAxiosDefaults} from './util.js';
 
 class App extends Component {
+  componentWillMount(){
+    setAxiosDefaults()
+    localStorage.getItem("test")
+  }
   render() {
     return (
       <Router>
